@@ -7,7 +7,7 @@ pipeline {
                 docker {image 'mave'}
             }
             steps {
-                sh "mvn package -Dmaven.teste.skiṕ=true"
+                sh "mvn package -Dmaven.teste.skip=true"
             }
         }
     }
