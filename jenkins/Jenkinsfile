@@ -20,7 +20,7 @@ pipeline {
                 args '--name some-mysql -e MYSQL_ROOT_PASSWORD=root -d'}
             }
             steps {
-               sh "mvn package -Dmaven.teste.skip=true"
+               sh "mvn package -Dmaven.test.skip=true"
             }
         }
     }
