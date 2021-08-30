@@ -7,7 +7,26 @@ pipeline {
                 docker {image 'maven'}
             }
             steps {
-                sh "mvn package -Dmaven.teste.skip=true"
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+
+        stage('Unit Test') { 
+            agent {
+                docker {
+                image 'mysql'
+                args '--name some-mysql -e MYSQL_ROOT_PASSWORD=root -d'}
+            }
+            steps {
+                sh 'mvn test -DforkCount=0'
+                sh '''
+                    docker exec some-mysql sh -c 'exec mysql < ./db/dump.sql
+                    '''
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                }
             }
         }
     }
