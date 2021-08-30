@@ -18,15 +18,7 @@ pipeline {
                 args '--name some-mysql -e MYSQL_ROOT_PASSWORD=root -d'}
             }
             steps {
-                sh 'mvn test -DforkCount=0'
-                sh '''
-                    docker exec some-mysql sh -c 'exec mysql < ./db/dump.sql
-                    '''
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
+               sh "mvn package -Dmaven.teste.skip=true"
             }
         }
     }
