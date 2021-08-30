@@ -1,0 +1,14 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                docker {image 'mave'}
+            }
+            steps {
+                sh "mvn package -Dmaven.teste.skiṕ=true"
+            }
+        }
+    }
+}
