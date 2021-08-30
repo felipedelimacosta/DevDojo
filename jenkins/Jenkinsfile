@@ -14,11 +14,13 @@ pipeline {
         }
 
         stage('Unit Test') { 
-            agent {
-                docker {
-                image 'mysql'
-                args '--name some-mysql -e MYSQL_ROOT_PASSWORD=root -d'}
-            }
+            /*
+            #!agent {
+            #!    docker {
+            #!    image 'mysql'
+            #!    args '--name some-mysql -e MYSQL_ROOT_PASSWORD=root -d'}
+            #! }
+            */
             steps {
                sh "mvn clean package -DskipTests=true"
             }
